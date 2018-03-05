@@ -71,6 +71,14 @@ export class OpenFileTracker implements Disposable {
 				},
 			}).then(() => { }, util.logError); // tslint:disable-line:no-empty
 		}
+
+		if (this.analyzer.capabilities.supportsFlutterOutline) {
+			this.analyzer.flutterSetSubscriptions({
+				subscriptions: {
+					OUTLINE: priorityFiles,
+				},
+			});
+		}
 	}
 
 	public static getOutlineFor(file: Uri): Outline | undefined {
